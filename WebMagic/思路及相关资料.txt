@@ -45,7 +45,7 @@ HttpClient + Jsoup + HtmlUnit :
 
 
 
-可以分为两部分：一部分为新闻展示，另一部分可以为新闻搜索。（以网易新闻网为目标）
+可以分为两部分：一部分为新闻展示，另一部分可以为新闻搜索。（以今日头条http://www.toutiao.com/为目标）
 
 一、新闻展示：
 1、即直接从相关新闻抓取信息，包括：新闻标题、发布时间、关键字、浏览次数（跟帖或者评论次数）、新闻来源、新闻主体内容、访问链接等。
@@ -59,7 +59,9 @@ HttpClient + Jsoup + HtmlUnit :
 三、数据存储：
 1、关于抓取到的数据处理和数据存储可以参考“Java+MySQL实现网络爬虫程序”：http://johnhany.net/2013/11/web-crawler-using-java-and-mysql/
 
-
+中国政府网：
+	四部分：1、要闻	2、政策	3、专题	4、高端访谈-发布会
+	实体类：（1）bigTitle大标题、smallTitle小标题  （2）href原链接、url本地路径（本地链接） （3）time时间  （4）from新闻来源  （5）content新闻内容  （6）section版块标题
 
 
 

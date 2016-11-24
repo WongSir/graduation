@@ -51,7 +51,15 @@ public class Rule
 	{
 	}
 
-	
+	/**
+	 * 
+	 * @param url  目标链接，如：http://www.gov.cn/ 
+	 * @param params  参数集合 ，如：new String[]{"keyWord","time"}
+	 * @param values  参数对应的值，如：new String[]{"习近平","2016年"}
+	 * @param resultTagName 对返回的HTML，第一次过滤所用的标签，请先设置type，如："title"是一个类选择器，则对应的type是CLASS；其他的如“div.con-model”则对应标签选择器SELECTION
+	 * @param type  设置resultTagName的类型，默认为ID（CLASS / ID / SELECTION）
+	 * @param requestMoethod 请求的类型，默认GET
+	 */
 	public Rule(String url, String[] params, String[] values,
 			String resultTagName, int type, int requestMoethod)
 	{

@@ -26,6 +26,18 @@ import com.zhy.spider.util.TextUtil;
 public class ExtractService
 {
 	/**
+	 * Jsoup解析页面示例
+	 * 
+	 * Document doc = Jsoup.connect("http://www.oschina.net/")   
+		 .data("query", "Java")   // 请求参数  
+		 .userAgent("I ’ m jsoup") // 设置 User-Agent   
+		 .cookie("auth", "token") // 设置 cookie   
+		 .timeout(3000)           // 设置连接超时时间  
+		 .post();                 // 使用 POST 方法访问 URL   
+	 */
+	
+	
+	/**
 	 * @param rule
 	 * @return
 	 */
@@ -48,8 +60,12 @@ public class ExtractService
 			String resultTagName = rule.getResultTagName();
 			int type = rule.getType();
 			int requestType = rule.getRequestMoethod();
-
-			Connection conn = Jsoup.connect(url);
+			
+			//自己添加，对url进行拼接
+			String url2 = url+values[0];
+			Connection conn = Jsoup.connect(url2);
+			
+//			Connection conn = Jsoup.connect(url);
 			// 设置查询参数
 
 			if (params != null)

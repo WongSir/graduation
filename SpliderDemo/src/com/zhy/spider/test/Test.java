@@ -34,7 +34,21 @@ public class Test
 	 */
 	@org.junit.Test
 	public void getDatasByCssQueryUserBaidu() {
-		Rule rule = new Rule("http://news.baidu.com/ns", new String[] { "word" }, new String[] { "支付宝" }, null, -1,
+		Rule rule = new Rule("http://news.baidu.com/ns", new String[] { "word" }, new String[] { "习近平" }, null, -1,
+				Rule.GET);
+		List<LinkTypeData> extracts = ExtractService.extract(rule);
+		printf(extracts);
+	}
+	
+	
+	/**
+	 * 使用中国政府网http://www.gov.cn/   
+	 * 
+	 * 设置url：http://www.gov.cn/ 
+	 */
+	@org.junit.Test
+	public void getDatasByCssQueryUserGov() {
+		Rule rule = new Rule("http://sousuo.gov.cn/s.htm?t=govall&q=", new String[] { "word" }, new String[] { "习近平" }, null, -1,
 				Rule.GET);
 		List<LinkTypeData> extracts = ExtractService.extract(rule);
 		printf(extracts);
@@ -47,6 +61,7 @@ public class Test
 		{
 			System.out.println(data.getLinkText());
 			System.out.println(data.getLinkHref());
+			System.out.println(data.getSummary());
 			System.out.println("***********************************");
 		}
 

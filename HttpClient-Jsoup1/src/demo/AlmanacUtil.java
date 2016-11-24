@@ -111,6 +111,7 @@ public class AlmanacUtil {
         should=getSuggestion(document,"yi");
         //忌
         avoid=getSuggestion(document,"ji");
+        
         Almanac almanac = new Almanac(solarDate,lunarDate,chineseAra,should,avoid);
         return almanac;
     }

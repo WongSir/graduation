@@ -10,31 +10,51 @@ public class GovEntity {
 	private String section;//版块标题
 	private String bigTitle;//新闻大标题
 	private String smallTitle;//新闻小标题
-	private String href;//原文链接
+	private String secLink;//版块详情链接
+	private String href;//原文详情链接
 	private String url;//本地路径（重新生成的本地链接）
 	private String time;//时间
 	private String from;//新闻来源
 	private String content;//新闻内容
 	
 	
-	public GovEntity(String section, String bigTitle, String smallTitle, String href, String url, String time,
-			String from, String content) {
+	public GovEntity(String section, String bigTitle, String smallTitle, String secLink, String href, String url,
+			String time, String from, String content) {
 		super();
 		this.section = section;
 		this.bigTitle = bigTitle;
 		this.smallTitle = smallTitle;
+		this.secLink = secLink;
 		this.href = href;
 		this.url = url;
 		this.time = time;
 		this.from = from;
 		this.content = content;
 	}
+
+
 	
 
-
-	public GovEntity(String section) {
+public GovEntity(String smallTitle, String time, String from, String content) {
 		super();
-		this.section = section;
+		this.smallTitle = smallTitle;
+		this.time = time;
+		this.from = from;
+		this.content = content;
+	}
+
+
+
+
+//	public GovEntity(String smallTitle) {
+//		super();
+//		this.smallTitle = smallTitle;
+//	}
+
+
+
+	public GovEntity() {
+		
 	}
 
 
@@ -116,6 +136,18 @@ public class GovEntity {
 
 	public void setSection(String section) {
 		this.section = section;
+	}
+
+
+
+	public String getSecLink() {
+		return secLink;
+	}
+
+
+
+	public void setSecLink(String secLink) {
+		this.secLink = secLink;
 	}
 	
 	

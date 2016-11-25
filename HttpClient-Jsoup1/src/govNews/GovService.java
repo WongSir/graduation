@@ -1,6 +1,8 @@
 package govNews;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -30,15 +32,17 @@ public class GovService {
 	}
 	
 	/**
-	 * 获取新闻信息
+	 * 获取新闻信息头部信息
 	 * @param url
 	 * @return govNews
 	 */
-	public static GovEntity getNews(String url){
+	public static List<GovEntity> getNewsHead(String url){
 		
 		String html = pickData(url);
-		GovEntity govNews = analyzeHtml(html);
-		return govNews;
+//		System.out.println("测试点***********************************");
+//		System.out.println(html);
+		List<GovEntity> govNewsHead = analyzeHead(html);
+		return govNewsHead;
 	}
 	
 	/**
@@ -50,6 +54,8 @@ public class GovService {
 		
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpGet = new HttpGet(url);
+		//设置编码格式
+		String charset="utf-8";
 		try {
 			//HttpResponse:服务器在接收和解释请求之后返回一个HTTP响应信息
 			CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
@@ -58,7 +64,12 @@ public class GovService {
 				HttpEntity entity = httpResponse.getEntity();
 				//判断响应状态是否为空，并返回响应状态以便打印
 				if(entity!=null){
-					return EntityUtils.toString(entity);
+//					return EntityUtils.toString(entity);
+					String tmp = EntityUtils.toString(entity);
+					if(charset != null){
+						tmp= new String(tmp.getBytes("ISO-8859-1"),charset);
+					}
+					return tmp;
 				}
 			} finally {
 				httpResponse.close();
@@ -83,29 +94,92 @@ public class GovService {
 	}
 	
 	/**
-	 * 使用Jsoup解析页面信息
+	 * 使用Jsoup解析页面信息:版块标题、版块链接、大标题、原文链接
 	 * @param html
 	 * @return 返回解析后的数据
 	 */
-	public static GovEntity analyzeHtml(String html){
-		String section,bigTitle,smallTitle,href,url,time,from,content="";
+	public static List<GovEntity> analyzeHead(String html){
+		
+		String section,secLink,bigTitle,smallTitle,href,url,time,from,content;
+		
+		List<GovEntity> datas = new ArrayList<GovEntity>();
+		GovEntity data =null;
+		
 		/**
 		 * 将HTML解析成一个Document之后，就可以使用类似于DOM的方法进行操作
 		 * 一旦拥有了一个Document，你就可以使用Document中适当的方法或它父类 Element和Node中的方法来取得相关数据。
 		 */
 		Document document = Jsoup.parse(html);
-		//版块标题
-		Element gSection = document.select("div.lmtit").first();
-		section = gSection.child(0).text().toString().trim();
+		//版块标题、版块链接
+//		Element gSection = document.select("div.lmtit").first();
+//		section = gSection.child(0).text().toString();
+		Elements gSection = document.select("div.lmtit > a"); //取div下的class="lmtit"的a标签
+		String tmpLink = "http://www.gov.cn";//进行链接拼接
+		for(Element link : gSection){
+			if((section = link.text())==null){
+				continue;
+			}
+			secLink =tmpLink + link.attr("href");
+			
+			data =new GovEntity();
+			data.setSection(section);
+			data.setSecLink(secLink);
+			
+			datas.add(data);
+		}
 		
-		//大标题
-		Elements gBigTitle = document.select("ul.").first();
-//		bigTitle = gBigTitle.
+		
+		//大标题、原文链接
+//		Element gBigTitle = document.select("ul.h206 > li").first();
+//		bigTitle = gBigTitle.child(0).text().toString();
+		Elements gBigTitle = document.select("ul.h206 > li > a");
+		for(Element link : gBigTitle){
+			if((link.text()).isEmpty()){
+				continue;
+			}
+			bigTitle = link.text();
+			href = link.attr("href");
+			
+			data = new GovEntity();
+			data.setBigTitle(bigTitle);
+			data.setHref(href);
+			
+			datas.add(data);
+		}
+		
+		
+		//从大标题的链接进入抓取原文详情
+		for(GovEntity tmp : datas){
+			if(tmp.getHref()!=null){
+				String uri =tmp.getHref();
+				Entry(uri);
+			}
+		}
+		
+		
+		
+		
+		//GovEntity govEntity = new GovEntity(bigTitle);
+//		GovEntity govEntity = new GovEntity(section,bigTitle,smallTitle,href,time,from,content);
+//		return govEntity;
+		return datas;
+	}
+	
+	/**
+	 * 使用Jsoup解析页面信息:小标题、时间、新闻来源、新闻内容
+	 * @param html
+	 * @return 返回解析后的数据
+	 */
+	public static GovEntity analyzeBody(String html){
+		String smallTitle,url,time,from,content;
+//		List<GovEntity> datas = new ArrayList<GovEntity>();
+		GovEntity data =null;
+		
+		Document document = Jsoup.parse(html);
 		
 		//小标题
-		
-		//原文链接
-		
+		Element gSmallTitle = document.select("div.pub_border > h1").first();
+		smallTitle = gSmallTitle.text().toString();
 		//本地路径
 		
 		//时间
@@ -114,9 +188,31 @@ public class GovService {
 		
 		//新闻内容
 		
-		GovEntity govEntity = new GovEntity(section);
-//		GovEntity govEntity = new GovEntity(section,bigTitle,smallTitle,href,time,from,content);
+		
+		GovEntity govEntity = new GovEntity(smallTitle);
 		return govEntity;
 		
+	}
+	
+	/**
+	 * 获取新闻信息主体详细信息
+	 * @param url
+	 * @return
+	 */
+	public static GovEntity getNewsBody(String url){
+		String html = pickData(url);
+		GovEntity govNewsBody = analyzeBody(html);
+		return govNewsBody;
+		
+	}
+	
+	
+	/**
+	 * 多重链接入口
+	 * @param url
+	 * @return
+	 */
+	public static void Entry(String uri) {
+		getNewsBody(uri);
 	}
 }

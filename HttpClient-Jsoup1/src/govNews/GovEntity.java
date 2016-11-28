@@ -41,6 +41,7 @@ public GovEntity(String smallTitle, String time, String from, String content) {
 		this.time = time;
 		this.from = from;
 		this.content = content;
+}
 
 	public GovEntity(String smallTitle) {
 		super();

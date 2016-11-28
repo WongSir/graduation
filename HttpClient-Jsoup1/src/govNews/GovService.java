@@ -149,12 +149,12 @@ public class GovService {
 
 		
 		//从大标题的链接进入抓取原文详情
-		for(GovEntity tmp : datas){
-			if(tmp.getHref()!=null){
-				String uri =tmp.getHref();
-				Entry(uri);
-			}
-		}
+//		for(GovEntity tmp : datas){
+//			if(tmp.getHref()!=null){
+//				String uri =tmp.getHref();
+//				Entry(uri);
+//			}
+//		}
 		
 		
 		

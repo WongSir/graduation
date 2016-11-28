@@ -13,30 +13,26 @@ public class GovNewsTest {
 	
 	public static void main(String[] args){
 
-//		List<GovEntity> extracts = GovService.getNewsHead("http://www.gov.cn/index.htm");
+		List<GovEntity> extracts = GovService.getNewsHead("http://www.gov.cn/index.htm");
 //		System.out.println("大标题："+ govEntity.getBigTitle());
-//		printf(extracts);
+		printf(extracts);
 		
 //		GovEntity govNewsBody = GovService.getNewsBody("http://www.gov.cn/premier/2016-11/26/content_5138227.htm");
 //		System.out.println("小标题：" + govNewsBody.getSmallTitle());
 //		System.out.println("时间：" + govNewsBody.getTime());
 //		System.out.println("新闻来源：" + govNewsBody.getFrom());
 //		System.out.println("新闻内容：" + govNewsBody.getContent());
-		List<GovEntity> extracts = GovService.getNewsHead("http://www.gov.cn/index.htm");
-//		System.out.println("大标题："+ govEntity.getBigTitle());
-//		printf(extracts);
-		
-
+	
 	}
 	
 	public static void printf(List<GovEntity> datas){
 		for(GovEntity data : datas){
-//			if(data.getSection()==null){
-//				continue;
-//			}
-//			System.out.println("版块标题："+ data.getSection());
-//			System.out.println("版块标题链接："+ data.getSecLink());
-//			System.out.println("***********************************");
+			if(data.getSection()==null){
+				continue;
+			}
+			System.out.println("版块标题："+ data.getSection());
+			System.out.println("版块标题链接："+ data.getSecLink());
+			System.out.println("***********************************");
 //			if(data.getSection()==null){
 //				continue;
 //			}

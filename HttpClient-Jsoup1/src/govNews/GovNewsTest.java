@@ -16,11 +16,11 @@ public class GovNewsTest {
 //		System.out.println("大标题："+ govEntity.getBigTitle());
 //		printf(extracts);
 		
-		GovEntity govNewsBody = GovService.getNewsBody("http://www.gov.cn/premier/2016-11/25/content_5137628.htm");
-		System.out.println("小标题：" + govNewsBody.getSmallTitle());
-		System.out.println("时间：" + govNewsBody.getTime());
-		System.out.println("新闻来源：" + govNewsBody.getFrom());
-		System.out.println("新闻内容：" + govNewsBody.getContent());
+//		GovEntity govNewsBody = GovService.getNewsBody("http://www.gov.cn/premier/2016-11/26/content_5138227.htm");
+//		System.out.println("小标题：" + govNewsBody.getSmallTitle());
+//		System.out.println("时间：" + govNewsBody.getTime());
+//		System.out.println("新闻来源：" + govNewsBody.getFrom());
+//		System.out.println("新闻内容：" + govNewsBody.getContent());
 	}
 	
 	public static void printf(List<GovEntity> datas){

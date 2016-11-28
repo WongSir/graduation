@@ -170,9 +170,9 @@ public class GovService {
 	 * @param html
 	 * @return 返回解析后的数据
 	 */
-	public static GovEntity analyzeBody(String html){
+	public static List<GovEntity> analyzeBody(String html){
 		String smallTitle,url,time,from,content;
-//		List<GovEntity> datas = new ArrayList<GovEntity>();
+		List<GovEntity> datas = new ArrayList<GovEntity>();
 		GovEntity data =null;
 		
 		Document document = Jsoup.parse(html);
@@ -195,9 +195,12 @@ public class GovService {
 //		content = gContent.text().toString();
 		content = getNewsContent(document, "UCAP-CONTENT");
 		
+		//此处代码待完成
+		return datas;
 		
-		GovEntity govEntity = new GovEntity(smallTitle,time,from,content);
-		return govEntity;
+		
+//		List<GovEntity> govEntity = new GovEntity(smallTitle,time,from,content);
+//		return govEntity;
 		
 	}
 	
@@ -223,9 +226,9 @@ public class GovService {
 	 * @param url
 	 * @return
 	 */
-	public static GovEntity getNewsBody(String url){
+	public static List<GovEntity> getNewsBody(String url){
 		String html = pickData(url);
-		GovEntity govNewsBody = analyzeBody(html);
+		List<GovEntity> govNewsBody = analyzeBody(html);
 		return govNewsBody;
 		
 	}

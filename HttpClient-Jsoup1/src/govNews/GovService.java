@@ -146,7 +146,7 @@ public class GovService {
 			
 			datas.add(data);
 		}
-		
+
 		
 		//从大标题的链接进入抓取原文详情
 		for(GovEntity tmp : datas){
@@ -177,32 +177,27 @@ public class GovService {
 		
 		Document document = Jsoup.parse(html);
 		
-		//小标题
-		Element gSmallTitle = document.select("div.pub_border > h1").first();
-		smallTitle = gSmallTitle.text().toString();
-		//本地路径
 		
-		//时间
-		Element gTime = document.select("div.pages-date").first();
-		time = gTime.html().substring(0,18);
+		//从大标题的链接进入抓取原文详情
+		for(GovEntity tmp : datas){
+			if(tmp.getHref()!=null){
+				String uri =tmp.getHref();
+				Entry(uri);
+			}
+		}
 		
-		//新闻来源
-		Element gFrom = document.select("div.pages-date > span").first();
-		from = gFrom.text().toString();
 		
-		//新闻内容
-//		Element gContent = document.getElementById("UCAP-CONTENT");
-//		content = gContent.text().toString();
-		content = getNewsContent(document, "UCAP-CONTENT");
+		
+		
+		//GovEntity govEntity = new GovEntity(bigTitle);
+//		GovEntity govEntity = new GovEntity(section,bigTitle,smallTitle,href,time,from,content);
+//		return govEntity;
 		
 		//此处代码待完成
 		return datas;
-		
-		
-//		List<GovEntity> govEntity = new GovEntity(smallTitle,time,from,content);
-//		return govEntity;
-		
 	}
+	
+	
 	
 	/**
 	 * 获取新闻内容
@@ -242,4 +237,6 @@ public class GovService {
 	public static void Entry(String uri) {
 		getNewsBody(uri);
 	}
+	
+	
 }

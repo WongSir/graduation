@@ -12,6 +12,7 @@ public class GovNewsTest {
 	
 	
 	public static void main(String[] args){
+
 //		List<GovEntity> extracts = GovService.getNewsHead("http://www.gov.cn/index.htm");
 //		System.out.println("大标题："+ govEntity.getBigTitle());
 //		printf(extracts);
@@ -21,6 +22,11 @@ public class GovNewsTest {
 //		System.out.println("时间：" + govNewsBody.getTime());
 //		System.out.println("新闻来源：" + govNewsBody.getFrom());
 //		System.out.println("新闻内容：" + govNewsBody.getContent());
+		List<GovEntity> extracts = GovService.getNewsHead("http://www.gov.cn/index.htm");
+//		System.out.println("大标题："+ govEntity.getBigTitle());
+//		printf(extracts);
+		
+
 	}
 	
 	public static void printf(List<GovEntity> datas){

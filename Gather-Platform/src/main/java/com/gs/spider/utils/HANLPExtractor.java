@@ -28,7 +28,7 @@ public class HANLPExtractor implements NLPExtractor {
      * 抽取命名实体
      *
      * @param content 文章正文
-     * @return map的key是一下三种nr, ns, nt  其value就是对应的词表
+     * @return map的key是以下三种nr, ns, nt  其value就是对应的词表
      */
     public Map<String, Set<String>> extractNamedEntity(String content) {
         List<Term> termList = segment.seg(content);

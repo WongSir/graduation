@@ -1,12 +1,13 @@
 package com.gs.spider.controller.home;
 
-import com.gs.spider.controller.BaseController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.gs.spider.controller.BaseController;
 
 /**
  * Created by gsh199449 on 2016/11/24.

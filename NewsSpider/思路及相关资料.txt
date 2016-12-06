@@ -64,7 +64,7 @@ HttpClient + Jsoup + HtmlUnit :
 	实体类：（1）bigTitle大标题、smallTitle小标题  （2）href原链接、url本地路径（本地链接） （3）time时间  （4）from新闻来源  （5）content新闻内容  （6）section版块标题
 
 
-
+自定义监控或者定时任务：qrazt或者直接用自带的timer
 
 
 

@@ -39,7 +39,7 @@ public class GetTxt {
 					String title = RegContent.GetOneCon(">.*?<", titles.get(j));
 					title = title.replace("/", "").replace(" ", "");
 					title = "txt/" + title.substring(1, title.length() - 1).replace('(', ' ').trim().replace(')', ' ')
-							.trim().replace('£¨', ' ').trim().replace('£©', ' ').trim() + ".txt";
+							.trim().replace('£¨', ' ').trim().replace(' £©', ' ').trim() + ".txt";
 					SaveTxt.Sava(title, conts);
 					System.out.println("µÚ" + m + "Ò³µÚ" + count + "¸ö" + title);
 				}

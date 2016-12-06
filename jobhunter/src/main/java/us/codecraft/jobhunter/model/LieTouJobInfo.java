@@ -105,7 +105,6 @@ public class LieTouJobInfo implements AfterExtractor {
                 '}';
     }
 
-    @Override
     public void afterProcess(Page page) {
     }
 }

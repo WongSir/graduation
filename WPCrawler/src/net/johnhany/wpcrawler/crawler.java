@@ -23,6 +23,7 @@ import java.sql.Statement;
 /*
  * @main
  * start from here
+ * 准备研究
  */
 public class crawler {
 	
